@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 
 URL = None
 
-def setting_to_job(job):
+def setting_to_URL(word):
   global URL
-  URL = f"https://stackoverflow.com/jobs?q={job}&sort=i"
+  URL = f"https://stackoverflow.com/jobs?q={word}&sort=i"
 
 
 def get_last_page():
@@ -45,7 +45,10 @@ def extract_jobs(last_page):
       jobs.append(job)
   return jobs
 
-def get_jobs():
+def get_jobs(word):
+
+  setting_to_URL(word)
+
   last_page = get_last_page()
   jobs = extract_jobs(last_page)
   # jobs = extract_jobs(2)

@@ -4,9 +4,9 @@ from bs4 import BeautifulSoup
 LIMIT = 50
 URL = None
 
-def setting_to_job(job):
+def setting_to_URL(word):
   global URL
-  URL = f"https://www.indeed.com/jobs?q={job}&limit={LIMIT}"
+  URL = f"https://www.indeed.com/jobs?q={word}&limit={LIMIT}"
 
 def print_URL():
   print(URL)
@@ -61,7 +61,9 @@ def extract_jobs(last_page):
       jobs.append(job)
   return jobs
 
-def get_jobs():
+def get_jobs(word):
+
+  setting_to_URL(word)
 
   last_pages = get_last_pages()
 
