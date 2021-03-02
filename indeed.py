@@ -2,9 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 
 LIMIT = 50
-URL = "https://www.indeed.com/jobs?q=python&limit={LIMIT}"
+URL = None
+
+def setting_to_job(job):
+  global URL
+  URL = f"https://www.indeed.com/jobs?q={job}&limit={LIMIT}"
+
+def print_URL():
+  print(URL)
 
 def get_last_pages():
+
   result = requests.get(URL)
 
   soup = BeautifulSoup(result.text, "html.parser")
@@ -54,6 +62,7 @@ def extract_jobs(last_page):
   return jobs
 
 def get_jobs():
+
   last_pages = get_last_pages()
 
   jobs = extract_jobs(last_pages)

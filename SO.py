@@ -5,7 +5,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = f"https://stackoverflow.com/jobs?q=python&sort=i"
+URL = None
+
+def setting_to_job(job):
+  global URL
+  URL = f"https://stackoverflow.com/jobs?q={job}&sort=i"
 
 
 def get_last_page():
