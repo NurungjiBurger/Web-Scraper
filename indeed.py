@@ -34,7 +34,10 @@ def get_last_pages():
 def extract_job(html):
   title = html.find("h2", {"class": "title"}).find("a")["title"]
   company = html.find("span", {"class": "company"})
-  company_anchor = company.find("a")
+  if company is not None:
+    company_anchor = company.find("a")
+  else:
+    company = None
   # delete None 1
   if company:
     if company_anchor is not None:
