@@ -1,7 +1,7 @@
-from indeed import get_jobs as get_indeed_jobs
-from SO import get_jobs as get_so_jobs
-from save import save_to_file
-from flask import Flask, render_template, request, redirect
+from indeed_scrapper import get_jobs as get_indeed_jobs
+from so_scrapper import get_jobs as get_so_jobs
+from exporter import save_to_file
+from flask import Flask, render_template, request, redirect, send_file
 
 app = Flask("SuperScrapper")
 
@@ -29,7 +29,7 @@ def report():
     return redirect("/")
   return render_template("report.html", searchingBy=word, resultsNumber=len(jobs), jobs=jobs)
 
-"""
+
 @app.route("/export")
 def export():
   try:
@@ -38,11 +38,15 @@ def export():
       raise Exception();
     word = word.lower()
     jobs = DB.get(word)
+    if not jobs:
+      raise Exception();
+    save_to_file(jobs)
+    return send_file("jobs.csv")
   except:
     return redirect("/")
 
 app.run(host="0.0.0.0")
-"""
+
 
 """
 job = input("어떤 언어의 직종을 원하십니까?\n")
